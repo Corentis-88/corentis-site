@@ -19,7 +19,7 @@ export function LogoImage({ size = "header", className }: LogoImageProps) {
       priority={header}
       className={cn(
         "w-auto object-contain",
-        header ? "h-[4.8rem] sm:h-[6.2rem] lg:h-[10.05rem] xl:h-[11.1rem]" : "h-[7rem] sm:h-[10rem] lg:h-[19.2rem] xl:h-[22.08rem]",
+        header ? "h-[4.6rem] sm:h-[6.4rem] lg:h-[10.5rem] xl:h-[11.5rem]" : "h-[7rem] sm:h-[10rem] lg:h-[19.2rem] xl:h-[22.08rem]",
         className,
       )}
     />
