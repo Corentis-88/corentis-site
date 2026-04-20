@@ -9,7 +9,7 @@ export default function AboutPage() {
         title="Infrastructure for safer AI deployment"
         description="Corentis is building the policy plane for regulated AI: infrastructure that helps organisations deploy advanced AI in high-stakes workflows with greater visibility, stronger oversight, and clearer evidence."
         ctaHref="/contact/"
-        ctaLabel="Register interest"
+        ctaLabel="Speak with us"
       />
 
       <section className="py-20 sm:py-24">
@@ -23,7 +23,10 @@ export default function AboutPage() {
                 used in important work. That need is especially clear in regulated environments, where trust cannot
                 rest on good intentions alone.
               </p>
-              <p>Corentis exists to help meet that need in a form that is practical enough to use and strong enough to scale.</p>
+              <p>
+                Corentis exists to help meet that need in a form that is practical enough to use and strong enough to
+                scale.
+              </p>
             </div>
           </div>
 
@@ -45,8 +48,22 @@ export default function AboutPage() {
       </section>
 
       <section className="border-y border-white/8 bg-[rgba(255,255,255,0.02)] py-20 sm:py-24">
-        <Container>
-          <div className="glass-panel max-w-4xl p-6 sm:p-8">
+        <Container className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="glass-panel p-6 sm:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--color-electric-soft)]">Why The Company Matters</p>
+            <div className="mt-6 space-y-4 text-sm leading-7 text-[var(--color-text-muted)]">
+              <p>
+                Corentis is being built around a practical category need. As more organisations want to deploy AI in
+                meaningful work, they need better control, assurance, and review structure around those workflows.
+              </p>
+              <p>
+                That makes the opportunity commercially relevant, but also important from a wider governance and
+                accountability perspective.
+              </p>
+            </div>
+          </div>
+
+          <div className="glass-panel p-6 sm:p-8">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--color-electric-soft)]">Long-Term Vision</p>
             <div className="mt-6 space-y-4 text-sm leading-7 text-[var(--color-text-muted)]">
               <p>Our long-term vision is to help make governed AI deployment normal rather than exceptional.</p>

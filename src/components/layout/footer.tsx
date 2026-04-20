@@ -7,9 +7,11 @@ import { siteConfig } from "@/lib/site";
 const footerLinks = [
   { href: "/platform/", label: "Platform" },
   { href: "/financial-services/", label: "Financial Services" },
-  { href: "/clinical-trials/", label: "Clinical Trials" },
+  { href: "/life-sciences/", label: "Life Sciences" },
+  { href: "/investors/", label: "Investors" },
+  { href: "/assurance/", label: "Assurance Overview" },
   { href: "/about/", label: "About" },
-  { href: "/contact/", label: "Register Interest" },
+  { href: "/contact/", label: "Contact" },
   { href: "/privacy/", label: "Privacy Notice" },
   { href: "/cookies/", label: "Cookie Policy" },
   { href: "/terms/", label: "Terms of Use" },

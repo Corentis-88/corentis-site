@@ -42,7 +42,7 @@ export function ContactForm() {
 
   const formHint = useMemo(
     () =>
-      "Whether you are exploring the platform for your organisation, following the company as an investor, or interested in a partnership conversation, we would be glad to hear from you.",
+      "Whether you want an investor overview, an assurance summary, a sector walkthrough, or a partnership conversation, we would be glad to hear from you.",
     [],
   );
 
@@ -161,7 +161,7 @@ export function ContactForm() {
     <div className="glass-panel p-6 sm:p-8">
       <div className="mb-8">
         <div>
-          <h2 className="text-2xl font-semibold tracking-[-0.04em] text-white">Register interest</h2>
+          <h2 className="text-2xl font-semibold tracking-[-0.04em] text-white">Request an overview</h2>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-[var(--color-text-muted)]">{formHint}</p>
         </div>
       </div>
@@ -266,7 +266,7 @@ export function ContactForm() {
                 Sending
               </span>
             ) : (
-              "Register interest"
+              "Request overview"
             )}
           </Button>
 

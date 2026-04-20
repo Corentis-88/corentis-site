@@ -27,7 +27,7 @@ export function Header() {
           <LogoImage size="header" />
         </Link>
 
-        <nav className="hidden items-center gap-5 lg:gap-7 md:flex">
+        <nav className="hidden items-center gap-5 xl:flex">
           {navigation.map((item) => (
             <Link
               key={item.href}
@@ -39,11 +39,11 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden md:block">
-          <Button href="/contact/">Register interest</Button>
+        <div className="hidden xl:block">
+          <Button href="/contact/">Request overview</Button>
         </div>
 
-        <div className="md:hidden">
+        <div className="xl:hidden">
           <button
             type="button"
             aria-expanded={mobileMenuOpen}
@@ -57,7 +57,7 @@ export function Header() {
       </Container>
 
       {mobileMenuOpen ? (
-        <div className="border-t border-[rgba(26,49,95,0.88)] bg-[rgba(4,18,43,0.98)] md:hidden">
+        <div className="border-t border-[rgba(26,49,95,0.88)] bg-[rgba(4,18,43,0.98)] xl:hidden">
           <Container className="py-4">
             <div className="glass-panel p-3">
               <div className="flex flex-col gap-2">
@@ -72,7 +72,7 @@ export function Header() {
                   </Link>
                 ))}
                 <Button href="/contact/" className="mt-2 w-full" onClick={() => setMobileMenuOpen(false)}>
-                  Register interest
+                  Request overview
                 </Button>
               </div>
             </div>

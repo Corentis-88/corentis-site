@@ -3,7 +3,7 @@ export const siteConfig = {
   shortName: "Corentis",
   title: "Corentis | The policy plane for regulated AI",
   description:
-    "Corentis helps organisations use advanced AI in high-stakes workflows without losing visibility, control, or human accountability.",
+    "Corentis is the control and assurance layer for regulated AI deployment, helping organisations govern high-stakes workflows with testing, approvals, monitoring, and evidence.",
   url: "https://corentis.ai",
   email: "hello@corentis.co.uk",
 };
@@ -12,9 +12,9 @@ export const navigation = [
   { href: "/", label: "Home" },
   { href: "/platform/", label: "Platform" },
   { href: "/financial-services/", label: "Financial Services" },
-  { href: "/clinical-trials/", label: "Clinical Trials" },
-  { href: "/about/", label: "About" },
-  { href: "/contact/", label: "Register Interest" },
+  { href: "/life-sciences/", label: "Life Sciences" },
+  { href: "/investors/", label: "Investors" },
+  { href: "/contact/", label: "Contact" },
 ];
 
 export const platformModules = [

@@ -23,16 +23,7 @@ Every non-brand image used on the site is documented below. No editorial image s
 - Creator name if available: Jan van der Wolf
 - Original URL: https://www.pexels.com/photo/modern-office-building-glass-facade-33643675/
 
-## 2. Contact
-
-- Page or section used:
-  Contact page supporting architecture visual
-- Source site: Pexels
-- Image title or description: Modern Office Building with Reflective Glass Façade
-- Creator name if available: SHOX ART
-- Original URL: https://www.pexels.com/photo/modern-office-building-with-reflective-glass-facade-34452583/
-
-## 3. Financial Services
+## 2. Financial Services
 
 - Page or section used:
   Home "Built for high-stakes workflows" Financial Services tile
@@ -42,11 +33,12 @@ Every non-brand image used on the site is documented below. No editorial image s
 - Creator name if available: Rob R
 - Original URL: https://www.pexels.com/photo/a-building-with-glass-panels-under-a-blue-sky-10912983/
 
-## 4. Clinical Trials
+## 3. Clinical Trials / Life Sciences
 
 - Page or section used:
   Home "Built for high-stakes workflows" Clinical Trials tile
   Clinical Trials page hero image
+  Life Sciences page hero image
 - Source site: Pexels
 - Image title or description: Medical Practitioners doing a research on a Lab
 - Creator name if available: Pavel Danilyuk
