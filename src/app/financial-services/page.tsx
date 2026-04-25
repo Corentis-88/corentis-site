@@ -161,14 +161,13 @@ export default function FinancialServicesPage() {
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--color-electric-soft)]">How Corentis Fits</p>
             <div className="mt-6 space-y-4 text-sm leading-7 text-[var(--color-text-muted)]">
               <p>
-                Corentis is designed to sit around an AI-assisted workflow rather than replace the model or the
-                operational system already in use. The key product layer is Policy Composer: it turns plain-English
-                complaints policy into operational controls.
+                In a complaints workflow, Corentis works with your existing CRM or case-management process:
+                identifying the relevant policy, applying controls, guiding the advisor, blocking unsafe send where
+                needed, and preserving the evidence trail alongside the customer record.
               </p>
               <p>
-                Teams can identify the relevant complaints policy, apply a structured control plan, guide the advisor,
-                block unsafe direct send where human approval is required, trigger vulnerable-customer escalation, and
-                export the evidence needed by operations, risk, and compliance stakeholders.
+                This supports increased productivity, better customer experience, and more effective complaints
+                handling across teams while keeping review, escalation, and evidence visible.
               </p>
               <p>
                 That makes early rollout more practical for middle-management owners as well as technical and control

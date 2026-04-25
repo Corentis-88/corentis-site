@@ -454,7 +454,7 @@ export default function HomePage() {
             <ul className="mt-6 space-y-3 text-sm leading-7 text-[var(--color-text-muted)]">
               <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">A policy-control and evidence layer for AI-assisted regulated workflows</li>
               <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">A way to connect policy, controls, human review, escalation, and evidence in one governed workflow</li>
-              <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">A reviewable operating layer around sensitive workflow steps, not a replacement for the underlying AI system</li>
+              <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">A reviewable operating layer designed to integrate regulated AI into your CRM and case-management workflows rather than replace them</li>
             </ul>
           </div>
 

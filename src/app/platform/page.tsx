@@ -132,6 +132,24 @@ export default function PlatformPage() {
         </Container>
       </section>
 
+      <section className="py-20 sm:py-24">
+        <Container>
+          <div className="glass-panel p-6 sm:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--color-electric-soft)]">
+              Designed To Fit Existing Systems
+            </p>
+            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-white">
+              Controls around the tools teams already use.
+            </h2>
+            <p className="mt-6 max-w-3xl text-sm leading-7 text-[var(--color-text-muted)]">
+              Corentis is being built to connect with CRM, case-management, workflow, and evidence repositories. The
+              goal is to apply controls, guide users, and capture evidence inside the operating model teams already
+              rely on, rather than forcing sensitive work into a separate tool.
+            </p>
+          </div>
+        </Container>
+      </section>
+
       <section className="border-y border-white/8 bg-[rgba(255,255,255,0.02)] py-20 sm:py-24">
         <Container>
           <StageGrid
