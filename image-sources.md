@@ -28,6 +28,7 @@ Every non-brand image used on the site is documented below. No editorial image s
 - Page or section used:
   Home "Built for high-stakes workflows" Financial Services tile
   Financial Services page hero image
+  Financial Services workflow brief PDF cover
 - Source site: Pexels
 - Image title or description: A Building with Glass Panels under a Blue Sky
 - Creator name if available: Rob R
@@ -39,6 +40,7 @@ Every non-brand image used on the site is documented below. No editorial image s
   Home "Built for high-stakes workflows" Clinical Trials tile
   Clinical Trials page hero image
   Life Sciences page hero image
+  Life Sciences bounded use case brief PDF cover
 - Source site: Pexels
 - Image title or description: Medical Practitioners doing a research on a Lab
 - Creator name if available: Pavel Danilyuk

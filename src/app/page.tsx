@@ -10,11 +10,18 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { HeroArchitecture } from "@/components/hero-architecture";
 import { EvidencePack } from "@/components/evidence-pack";
 import { ProductSnapshot } from "@/components/product-snapshot";
+import { getPackRequestHref, getRequestHref } from "@/lib/packs";
 
 const whyPoints = [
   {
+    icon: BadgeCheck,
+    title: "Policy Composer",
+    description:
+      "Convert plain-English policy into structured controls: what the AI may do, what it must not do, when review is required, and what evidence must be recorded.",
+  },
+  {
     icon: TestTubeDiagonal,
-    title: "Testing before live use",
+    title: "Testing before operational use",
     description:
       "Check prompts, workflow paths, controls, and failure modes before a team depends on the output.",
   },
@@ -38,16 +45,16 @@ const audiencePaths = [
     title: "Assess the company quickly",
     description:
       "See the market need, initial wedge, current build stage, and the route from early workflow adoption to broader platform value.",
-    href: "/investors/",
-    ctaLabel: "View investor overview",
+    href: getPackRequestHref("investor-overview"),
+    ctaLabel: "Request investor overview",
   },
   {
     audience: "For Financial Services",
     title: "See the workflow fit",
     description:
       "Explore how Corentis adds policy checks, review gates, exception handling, and evidence export around sensitive operational workflows.",
-    href: "/financial-services/",
-    ctaLabel: "See the financial services workflow",
+    href: getPackRequestHref("financial-services-workflow-brief"),
+    ctaLabel: "Request financial-services walkthrough",
   },
   {
     audience: "For Life Sciences",
@@ -62,31 +69,39 @@ const audiencePaths = [
     title: "Review the assurance case",
     description:
       "See how Corentis approaches oversight, review discipline, evidence production, and careful claim boundaries in practice.",
-    href: "/assurance/",
-    ctaLabel: "Read assurance overview",
+    href: getPackRequestHref("assurance-summary"),
+    ctaLabel: "Request assurance summary",
+  },
+  {
+    audience: "For Government / Funding",
+    title: "Assess public value and readiness",
+    description:
+      "Review the responsible deployment case, UK regulated-sector adoption path, evidence generation, and current V1 stage without inflated funding claims.",
+    href: getRequestHref("government-funding-readiness"),
+    ctaLabel: "Request funding readiness overview",
   },
 ];
 
 const stageItems = [
   {
     label: "Current stage",
-    title: "Prototype product direction",
-    description: "Corentis is at an early build stage, refining the platform shape and how governed deployment should work in practice.",
+    title: "Working V1 demo in financial services",
+    description: "Corentis now has a local interactive V1 complaints-assistant demo that shows policy selection, control-plan application, review blocking, escalation, and evidence capture.",
   },
   {
     label: "Exists now",
-    title: "Illustrative workflow and evidence modules",
-    description: "The current site shows prototype workflow views, sample evidence outputs, and worked examples to make the product direction concrete.",
+    title: "Interactive workflow and evidence surfaces",
+    description: "The current product story is grounded in an interactive V1 demo plus prototype workflow views, sample evidence outputs, and sector-specific walkthroughs.",
   },
   {
     label: "Being validated",
-    title: "Initial workflow wedge and buyer fit",
-    description: "Current work is focused on which bounded workflows land first, who needs them most, and what proof serious buyers require.",
+    title: "Complaints-assistant buyer fit and design-partner path",
+    description: "Current work is focused on design-partner conversations, workflow fit in financial services, and what proof serious buyers and reviewers need next.",
   },
   {
     label: "Near-term path",
     title: "From one workflow to platform expansion",
-    description: "The commercial route starts with one approved workflow and expands into adjacent use cases with similar control and evidence needs.",
+    description: "The commercial route starts with one internally approved workflow and expands into adjacent use cases with similar control and evidence needs.",
   },
 ];
 
@@ -100,23 +115,23 @@ const quickOutcomes = [
 const howItWorks = [
   {
     label: "01",
-    title: "Define the workflow",
-    description: "Capture the use case, standards, owners, and points where human review is required.",
+    title: "Policy Composer identifies the rulebook",
+    description: "Plain-English policy is turned into operational controls around one AI-assisted workflow.",
   },
   {
     label: "02",
-    title: "Apply controls before launch",
-    description: "Test prompts, check policy conditions, and make approval gates visible before live use.",
+    title: "Control plan is applied",
+    description: "Corentis defines what the workflow may do, what it must not do, when review is required, and what evidence must be captured.",
   },
   {
     label: "03",
-    title: "Monitor in operation",
-    description: "Track exceptions, overrides, alerts, and other runtime signals that matter in practice.",
+    title: "Unsafe actions are blocked or escalated",
+    description: "Where direct send is not acceptable, the workflow stops, routes to a named reviewer, and triggers escalation when needed.",
   },
   {
     label: "04",
-    title: "Export evidence",
-    description: "Generate packs that support governance meetings, assurance review, procurement, or audit support.",
+    title: "Evidence Vault keeps the record",
+    description: "Evidence artefacts are persisted and surfaced so later review does not depend on reconstruction.",
   },
 ];
 
@@ -136,33 +151,39 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_left_top,rgba(46,141,255,0.22),transparent_28%)]" />
         </div>
 
-        <Container className="relative grid gap-10 py-14 sm:gap-12 sm:py-18 lg:grid-cols-[1.05fr_0.95fr] lg:items-end lg:gap-14 lg:py-28">
-          <div className="max-w-4xl">
-            <h1 className="mt-4 max-w-4xl text-balance font-[var(--font-display)] text-4xl font-semibold tracking-[-0.07em] text-white sm:mt-6 sm:text-6xl lg:text-7xl">
+        <Container className="relative grid gap-10 py-14 sm:gap-12 sm:py-18 lg:grid-cols-[1.05fr_0.95fr] lg:items-start lg:gap-14 lg:py-28 xl:py-30">
+          <div className="max-w-4xl lg:pt-10 xl:pt-12">
+            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[var(--color-electric-soft)]">
               Corentis
+            </p>
+            <h1 className="mt-4 max-w-4xl text-balance font-[var(--font-display)] text-4xl font-semibold tracking-[-0.07em] text-white sm:mt-6 sm:text-6xl lg:text-7xl">
+              Turn AI policy into governed action.
             </h1>
             <p className="mt-3 text-lg font-medium tracking-[-0.03em] text-white/86 sm:mt-4 sm:text-2xl">
-              The policy plane for regulated AI
+              The policy-control and evidence layer for regulated workflows.
             </p>
             <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--color-text-muted)] sm:mt-6 sm:text-lg sm:leading-8">
-              Corentis is the control and assurance layer between advanced AI and the standards that govern its use.
-              It helps organisations deploy AI in regulated workflows with testing, human approvals, runtime
-              monitoring, and evidence people can review and trust.
+              Corentis makes AI policy operational.
             </p>
             <p className="mt-5 max-w-2xl text-sm leading-7 text-white/72 sm:text-base">
-              Move from pilot uncertainty to a workflow that can be reviewed, approved, and defended.
+              It turns plain-English governance into live controls, review gates, escalation rules, and evidence trails that guide AI-assisted work as it happens.
+            </p>
+            <p className="mt-5 max-w-2xl text-sm leading-7 text-white/72 sm:text-base">
+              That means teams can adopt AI faster, reduce training burden, improve consistency, handle more work safely, and stay firmly inside regulatory expectations.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:gap-4">
               <Button href="/platform/" className="w-full sm:w-auto">
                 Explore the platform
               </Button>
-              <Button href="/contact/" variant="secondary" className="w-full sm:w-auto">
-                Request an overview
+              <Button href={getPackRequestHref("financial-services-workflow-brief")} variant="secondary" className="w-full sm:w-auto">
+                Request financial-services walkthrough
               </Button>
             </div>
           </div>
 
-          <HeroArchitecture />
+          <div className="lg:pt-6 xl:pt-8">
+            <HeroArchitecture />
+          </div>
         </Container>
       </section>
 
@@ -193,17 +214,17 @@ export default function HomePage() {
             <SectionHeading
               eyebrow="Why Corentis"
               title="The AI question has changed."
-              description="The important question is no longer whether advanced AI can produce a useful output. It is whether that output can be deployed responsibly in work that carries operational, regulatory, or public-interest consequences."
+              description="The important question is no longer whether advanced AI can produce a useful output. It is whether policy can be turned into operational control in work that carries regulatory, conduct, or public-interest consequences."
             />
             <div className="mt-8 max-w-3xl space-y-4 text-base leading-8 text-[var(--color-text-muted)]">
               <p>
-                In those environments, confidence does not come from model performance alone. Teams need to see what
-                the workflow was meant to do, what checks were applied, where human review took place, and what
-                evidence remains if the process is questioned later.
+                In those environments, confidence does not come from model performance alone. Teams need to see which
+                policy applied, what controls were triggered, where human review took place, and what evidence remains
+                if the process is questioned later.
               </p>
               <p>
                 Corentis is being built to provide that missing layer. Not another model, and not a consultancy
-                wrapper, but a platform for governed deployment.
+                wrapper, but a policy-control and evidence layer for governed deployment.
               </p>
             </div>
           </div>
@@ -224,26 +245,26 @@ export default function HomePage() {
         <Container>
           <SectionHeading
             eyebrow="What Corentis Helps Teams Do"
-            title="Add control without turning every pilot into a major governance project."
-            description="Corentis helps teams move from experimentation to governed use with a smaller set of visible, repeatable controls."
+            title="Policy Composer is the heart of the product."
+            description="Policy Composer converts plain-English policy into structured control plans: allowed actions, blocked actions, review gates, escalation triggers, and evidence requirements."
           />
           <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {[
               {
-                title: "Pre-deployment testing",
-                description: "Check prompts, workflow logic, and failure modes before important AI-supported work reaches production.",
+                title: "Policy Composer",
+                description: "Convert plain-English policy into structured control plans: allowed actions, blocked actions, review gates, escalation logic, and evidence requirements.",
+              },
+              {
+                title: "Advisor guidance",
+                description: "Guide the person using the workflow with the relevant policy, required checks, and visible constraints at the point of action.",
               },
               {
                 title: "Approval and escalation",
-                description: "Introduce review gates, decision thresholds, and named sign-off where sensitive outputs need human judgement.",
+                description: "Block unsafe direct send, introduce named review gates, and trigger escalation where the workflow requires human judgement.",
               },
               {
-                title: "Runtime visibility",
-                description: "Monitor live behaviour, surface exceptions, and preserve context around overrides, alerts, and flagged events.",
-              },
-              {
-                title: "Evidence export",
-                description: "Generate review-ready packs for assurance, governance, procurement, audit, and internal oversight teams.",
+                title: "Evidence Vault",
+                description: "Persist evidence artefacts and review-ready outputs so governance, assurance, and audit-facing teams can inspect what happened later.",
               },
             ].map((module) => (
               <div key={module.title} className="glass-panel reveal-card p-6">
@@ -276,39 +297,39 @@ export default function HomePage() {
           <div className="mt-6">
             <ProductSnapshot
               eyebrow="Current Prototype Outputs"
-              title="What the product direction already looks like on the page"
-              description="These visual modules are intended to make the current prototype direction more concrete without implying live customer deployment."
-              statusLabel="Prototype-stage outputs"
+              title="What the current V1 direction already shows"
+              description="These visual modules are intended to reflect the current interactive demo direction without implying live customer deployment."
+              statusLabel="Interactive V1 demo direction"
               items={[
                 {
-                  label: "Testing",
-                  title: "Scenario checks captured",
-                  detail: "Illustrative coverage for prompt variants, policy conditions, and expected failure handling.",
-                  value: "Pre-launch",
+                  label: "Policy Composer",
+                  title: "Relevant policy is identified",
+                  detail: "The workflow can identify the applicable complaints policy and turn it into an operational control plan.",
+                  value: "Policy to controls",
                 },
                 {
                   label: "Approvals",
-                  title: "Named review gates visible",
-                  detail: "Important steps can be routed to specific reviewers with approval, override, or escalation paths.",
-                  value: "Human-in-loop",
+                  title: "Direct send can be blocked",
+                  detail: "Where human approval is required, the workflow stops, routes to a reviewer, and makes the reason visible.",
+                  value: "Human review",
                 },
                 {
-                  label: "Runtime",
-                  title: "Events surfaced as the workflow runs",
-                  detail: "Prototype views show alerts, overrides, and exceptions as workflow state rather than scattered notes.",
-                  value: "Live visibility",
+                  label: "Escalation",
+                  title: "Vulnerable-customer logic is triggered",
+                  detail: "Sensitive complaints can be escalated through visible workflow rules rather than handled ad hoc.",
+                  value: "Triggered by policy",
                 },
                 {
-                  label: "Exports",
-                  title: "Evidence shaped for review",
-                  detail: "Illustrative exports are framed for governance meetings, assurance review, audit support, and procurement scrutiny.",
-                  value: "PDF / JSON",
+                  label: "Evidence Vault",
+                  title: "Evidence artefacts are persisted",
+                  detail: "Review artefacts are surfaced in one place so later assurance, governance, and audit work is easier.",
+                  value: "Structured record",
                 },
               ]}
               events={[
-                "Control mapping attached to workflow record",
-                "Sensitive step routed to named approver",
-                "Evidence pack generated for review-ready export",
+                "Relevant complaints policy identified at workflow start",
+                "Unsafe direct send blocked pending human review",
+                "Evidence artefacts persisted in Evidence Vault",
               ]}
             />
           </div>
@@ -322,13 +343,13 @@ export default function HomePage() {
               Start With One Workflow
             </p>
             <h2 className="mt-4 text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">
-              The first win is not total transformation. It is a workflow people are willing to let go live.
+              The first win is not total transformation. It is one workflow people can understand, approve, and defend.
             </h2>
             <div className="mt-6 space-y-4 text-sm leading-7 text-[var(--color-text-muted)]">
               <p>
-                Corentis is designed for a practical adoption path: choose a bounded workflow, define the rules around
-                it, test it before launch, add review gates, monitor it in operation, and export the evidence that
-                helps teams stay aligned.
+                Corentis is designed for a practical adoption path: choose a bounded workflow, turn policy into a
+                control plan, guide the advisor, block unsafe actions, trigger review and escalation where needed, and
+                keep the evidence trail intact.
               </p>
               <p>
                 That makes early deployment easier to approve internally, easier to explain to stakeholders, and easier
@@ -383,7 +404,7 @@ export default function HomePage() {
           <StageGrid
             eyebrow="Current Product Stage"
             title="What exists now, what is illustrative, and what comes next"
-            description="Corentis is being presented honestly as an early product company. The goal here is to make the current stage legible rather than imply live customer deployment where none is being claimed."
+            description="Corentis is being presented honestly as an early product company with a working V1 local demo. The goal here is to make the current stage legible rather than imply live customer deployment where none is being claimed."
             items={stageItems}
           />
         </Container>
@@ -399,6 +420,14 @@ export default function HomePage() {
           <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_1fr]">
             <HeroArchitecture />
             <EvidencePack />
+          </div>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Button href={getPackRequestHref("sample-evidence-pack")} className="w-full sm:w-auto">
+              Request sample evidence pack
+            </Button>
+            <Button href={getPackRequestHref("assurance-summary")} variant="secondary" className="w-full sm:w-auto">
+              Request assurance summary
+            </Button>
           </div>
         </Container>
       </section>
@@ -416,6 +445,32 @@ export default function HomePage() {
         </Container>
       </section>
 
+      <section className="py-16 sm:py-24">
+        <Container className="grid gap-6 lg:grid-cols-[1fr_1fr]">
+          <div className="glass-panel p-6 sm:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--color-electric-soft)]">
+              What Corentis Is
+            </p>
+            <ul className="mt-6 space-y-3 text-sm leading-7 text-[var(--color-text-muted)]">
+              <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">A policy-control and evidence layer for AI-assisted regulated workflows</li>
+              <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">A way to connect policy, controls, human review, escalation, and evidence in one governed workflow</li>
+              <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">A reviewable operating layer around sensitive workflow steps, not a replacement for the underlying AI system</li>
+            </ul>
+          </div>
+
+          <div className="glass-panel p-6 sm:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--color-electric-soft)]">
+              What Corentis Is Not
+            </p>
+            <ul className="mt-6 space-y-3 text-sm leading-7 text-[var(--color-text-muted)]">
+              <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">Not a generic chatbot or a promise of more AI for its own sake</li>
+              <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">Not a substitute for legal, compliance, regulatory, or human judgement</li>
+              <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">Not a guarantee that AI is automatically safe or that regulation can be automated away</li>
+            </ul>
+          </div>
+        </Container>
+      </section>
+
       <section className="pb-16 sm:pb-24">
         <Container>
           <div className="glass-panel overflow-hidden p-6 sm:p-10 lg:p-12">
@@ -428,15 +483,15 @@ export default function HomePage() {
                   Choose the conversation that fits your role.
                 </h2>
                 <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--color-text-muted)]">
-                  Request an investor overview, an assurance summary, or a sector-specific walkthrough of the platform.
+                  Request an investor overview, an assurance summary, a financial-services walkthrough, or a design-partner conversation.
                 </p>
               </div>
               <div className="flex flex-col gap-3">
                 <Button href="/contact/" className="w-full sm:w-auto">
-                  Start the conversation
+                  Discuss design partnership
                 </Button>
-                <Button href="/assurance/" variant="secondary" className="w-full sm:w-auto">
-                  Read assurance overview
+                <Button href={getPackRequestHref("assurance-summary")} variant="secondary" className="w-full sm:w-auto">
+                  Request assurance summary
                 </Button>
               </div>
             </div>

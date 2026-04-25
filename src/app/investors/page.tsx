@@ -2,6 +2,8 @@ import { PageHero } from "@/components/page-hero";
 import { ProductSnapshot } from "@/components/product-snapshot";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { Button } from "@/components/ui/button";
+import { getPackRequestHref } from "@/lib/packs";
 
 const theses = [
   {
@@ -12,12 +14,12 @@ const theses = [
   {
     title: "An initial wedge with clear pain",
     description:
-      "Corentis can land with one workflow in sectors where approvals, escalation, and evidence are already part of the operating model.",
+      "Corentis can land with one workflow in sectors where approvals, escalation, and evidence are already part of the operating model, starting with complaints handling in financial services.",
   },
   {
     title: "A route to expansion",
     description:
-      "Once one workflow is live, the platform can expand into adjacent processes, growing from a single use case into a broader control layer.",
+      "Once one workflow is approved for operational use, the platform can expand into adjacent processes, growing from a single use case into a broader control layer.",
   },
 ];
 
@@ -35,17 +37,17 @@ const credibility = [
   {
     title: "What has already been built",
     description:
-      "The current product direction includes workflow control framing, illustrative oversight flows, sample evidence outputs, and sector-specific deployment narratives.",
+      "The current product direction includes a working local V1 complaints-assistant demo, workflow control framing, illustrative oversight flows, sample evidence outputs, and sector-specific deployment narratives.",
   },
   {
     title: "What is being validated now",
     description:
-      "Current validation is focused on first workflow wedge clarity, sector fit, buyer relevance, and the practical shape of evidence, review, and approval requirements.",
+      "Current validation is focused on first workflow wedge clarity, design-partner fit, buyer relevance, and the practical shape of evidence, review, and approval requirements.",
   },
   {
     title: "Near-term milestones",
     description:
-      "Near-term priorities include tightening the first repeatable workflow, converting conversations into design-partner learning, and sharpening the route from pilot to revenue.",
+      "Near-term priorities include tightening the complaints-assistant workflow, converting conversations into design-partner learning, and sharpening the route from pilot to revenue.",
   },
 ];
 
@@ -54,9 +56,9 @@ export default function InvestorsPage() {
     <>
       <PageHero
         eyebrow="Investors"
-        title="A category-defining control layer for regulated AI deployment"
-        description="Corentis is being built for a market that is becoming easier to see: organisations want to use advanced AI in meaningful work, but they need a safer path from pilot to deployment. Corentis aims to provide that control and assurance layer."
-        ctaHref="/contact/"
+        title="A policy-control layer for regulated AI deployment"
+        description="Corentis is being built for a market that is becoming easier to see: organisations want to use advanced AI in meaningful work, but they need a safer path from pilot to deployment. Corentis aims to provide the policy-control and evidence layer that makes that path more workable."
+        ctaHref={getPackRequestHref("investor-overview")}
         ctaLabel="Request investor overview"
       />
 
@@ -100,8 +102,8 @@ export default function InvestorsPage() {
             <div className="mt-6 space-y-4 text-sm leading-7 text-[var(--color-text-muted)]">
               <p>
                 The commercial model begins with one repeatable workflow where the enterprise pain point is already
-                visible: approvals are slow, evidence gathering is fragmented, and teams struggle to move from pilot to
-                deployment.
+                visible: complaints handling is review-heavy, policy-laden, operationally valuable, and often slowed
+                by fragmented approvals and evidence gathering.
               </p>
               <p>
                 From there, Corentis can expand into adjacent workflows and become a broader governed-deployment layer
@@ -115,15 +117,47 @@ export default function InvestorsPage() {
       <section className="py-20 sm:py-24">
         <Container className="grid gap-6 lg:grid-cols-[1fr_1fr]">
           <div className="glass-panel p-6 sm:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--color-electric-soft)]">Not Another Chatbot</p>
+            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-white">
+              Corentis does not sell more AI. It helps organisations approve AI-assisted work.
+            </h2>
+            <div className="mt-6 space-y-4 text-sm leading-7 text-[var(--color-text-muted)]">
+              <p>
+                The product thesis is that regulated organisations will not be blocked by a lack of AI capability alone.
+                They will be blocked by whether policy, human review, escalation, and evidence can be made operational.
+              </p>
+              <p>
+                That makes Corentis a deployment-control proposition: software that sits around AI-assisted workflows
+                and makes them easier to assess, approve, supervise, and review.
+              </p>
+            </div>
+          </div>
+
+          <div className="glass-panel p-6 sm:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--color-electric-soft)]">Current Build Progress</p>
+            <ul className="mt-6 space-y-3 text-sm leading-7 text-[var(--color-text-muted)]">
+              <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">Working local V1 prototype/demo</li>
+              <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">Policy-to-control composition through Policy Composer</li>
+              <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">Governed complaint walkthrough with advisor guidance</li>
+              <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">Blocked direct-send path and vulnerable-customer escalation logic</li>
+              <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">Evidence Vault lineage for policy, control, simulation, and evidence records</li>
+            </ul>
+          </div>
+        </Container>
+      </section>
+
+      <section className="py-20 sm:py-24">
+        <Container className="grid gap-6 lg:grid-cols-[1fr_1fr]">
+          <div className="glass-panel p-6 sm:p-8">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--color-electric-soft)]">Initial Wedge</p>
             <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-white">
-              Start with one governed workflow in a regulated operating environment.
+              Start with one governed complaints workflow in a regulated operating environment.
             </h2>
             <div className="mt-6 space-y-4 text-sm leading-7 text-[var(--color-text-muted)]">
               <p>
                 Corentis is not trying to solve every AI risk question at once. The first repeatable use case is a
-                workflow where AI is already attractive, but deployment is slowed by the need for review gates,
-                escalation logic, and evidence.
+                workflow where AI is already attractive, but deployment is slowed by policy interpretation, review
+                gates, escalation logic, and evidence requirements.
               </p>
               <p>
                 That makes the product easier to land, easier to explain, and more realistic as an enterprise buying
@@ -152,40 +186,71 @@ export default function InvestorsPage() {
           <ProductSnapshot
             eyebrow="Current Product Substance"
             title="What exists now, and what investors are actually being shown"
-            description="Corentis is being presented with deliberate stage honesty. The current build direction is product-shaped, but still early."
+            description="Corentis is being presented with deliberate stage honesty. The current build direction is product-shaped, interactive, and still early."
             statusLabel="Current build focus"
             items={[
               {
                 label: "Exists now",
-                title: "Workflow control framing",
-                detail: "Prototype views already make testing, review gates, runtime visibility, and evidence export legible as one product.",
-                value: "Illustrative",
+                title: "Working V1 financial-services demo",
+                detail: "A local complaints-assistant demo now shows policy identification, structured control plans, advisor guidance, blocked direct send, escalation, and Evidence Vault capture.",
+                value: "Interactive V1",
               },
               {
                 label: "Commercial wedge",
-                title: "One repeatable workflow first",
-                detail: "The first deployment path is a governed workflow where internal approval friction and evidence demands are already visible.",
+                title: "Complaints handling first",
+                detail: "The first deployment path is a governed complaints workflow where internal approval friction, policy interpretation, and evidence demands are already visible.",
                 value: "Focused",
               },
               {
                 label: "Expansion path",
                 title: "Shared control layer across workflows",
-                detail: "Once one workflow lands, the same policy, monitoring, and evidence logic can expand into adjacent processes.",
+                detail: "Once one workflow lands, the same policy-composer, monitoring, approval, and evidence logic can expand into adjacent processes.",
                 value: "Platform route",
               },
               {
                 label: "Now validating",
                 title: "Buyer and design-partner fit",
-                detail: "Current work is centred on which workflow lands first, what proof serious buyers need, and how that turns into revenue.",
+                detail: "Current work is centred on design-partner conversations, what proof serious buyers need, and how a first workflow turns into revenue.",
                 value: "In validation",
               },
             ]}
             events={[
-              "Initial workflow wedge defined around regulated operating pain",
+              "Complaints-assistant V1 demo now anchors the product story",
               "Prototype evidence and oversight outputs shaped for serious buyers",
               "Near-term goal is design-partner learning that sharpens pilot-to-revenue path",
             ]}
           />
+        </Container>
+      </section>
+
+      <section className="border-y border-white/8 bg-[rgba(255,255,255,0.02)] py-20 sm:py-24">
+        <Container className="grid gap-6 lg:grid-cols-[1fr_1fr]">
+          <div className="glass-panel p-6 sm:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--color-electric-soft)]">What the current build proves</p>
+            <div className="mt-6 space-y-4 text-sm leading-7 text-[var(--color-text-muted)]">
+              <p>
+                Corentis can now show a coherent product loop rather than thesis alone: a complaint enters, the
+                relevant policy is identified, the control plan is applied, direct send is blocked where required,
+                escalation is triggered, and evidence is retained.
+              </p>
+              <p>
+                That does not imply production deployment or live customer use. It does make the commercial conversation more concrete.
+              </p>
+            </div>
+          </div>
+
+          <div className="glass-panel p-6 sm:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--color-electric-soft)]">What should happen next</p>
+            <div className="mt-6 space-y-4 text-sm leading-7 text-[var(--color-text-muted)]">
+              <p>
+                The next meaningful validation step is design-partner engagement around one workflow, one policy source,
+                and one evidence requirement set.
+              </p>
+              <p>
+                That path is commercially legible because it connects product usage, workflow relevance, and a practical route from pilot to recurring software value.
+              </p>
+            </div>
+          </div>
         </Container>
       </section>
 
@@ -203,6 +268,28 @@ export default function InvestorsPage() {
                 <p className="mt-4 text-sm leading-7 text-[var(--color-text-muted)]">{item.description}</p>
               </div>
             ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="py-20 sm:py-24">
+        <Container>
+          <div className="glass-panel p-6 sm:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--color-electric-soft)]">Next Step</p>
+            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-white">
+              Continue the investor conversation on product substance, wedge, and validation path.
+            </h2>
+            <p className="mt-6 max-w-3xl text-sm leading-7 text-[var(--color-text-muted)]">
+              The most useful next discussion is usually about the first workflow wedge, what the V1 demo already proves, and how design-partner learning turns into a credible route to revenue.
+            </p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <Button href={getPackRequestHref("investor-overview")} className="w-full sm:w-auto">
+                Request investor overview
+              </Button>
+              <Button href="/contact/" variant="secondary" className="w-full sm:w-auto">
+                Discuss design partnership
+              </Button>
+            </div>
           </div>
         </Container>
       </section>

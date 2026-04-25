@@ -10,6 +10,7 @@ const footerLinks = [
   { href: "/life-sciences/", label: "Life Sciences" },
   { href: "/investors/", label: "Investors" },
   { href: "/assurance/", label: "Assurance Overview" },
+  { href: "/government-funding/", label: "Government / Funding" },
   { href: "/about/", label: "About" },
   { href: "/contact/", label: "Contact" },
   { href: "/privacy/", label: "Privacy Notice" },
@@ -24,7 +25,7 @@ export function Footer() {
         <div>
           <LogoImage size="footer" className="max-w-full" />
           <p className="mt-5 max-w-2xl text-sm leading-7 text-[var(--color-text-muted)]">
-            Infrastructure for governed AI deployment in regulated environments.
+            Policy-control and evidence infrastructure for AI-assisted regulated workflows.
           </p>
         </div>
 

@@ -22,7 +22,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-[rgba(26,49,95,0.88)] bg-[rgba(4,18,43,0.84)] backdrop-blur-xl">
-      <Container className="flex min-h-18 items-center justify-between gap-4 sm:min-h-20 lg:min-h-22">
+      <Container className="flex min-h-14 items-center justify-between gap-4 sm:min-h-16 lg:min-h-18">
         <Link href="/" className="min-w-0 shrink">
           <LogoImage size="header" />
         </Link>

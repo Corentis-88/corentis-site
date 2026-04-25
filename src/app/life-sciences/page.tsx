@@ -5,6 +5,7 @@ import { ProductSnapshot } from "@/components/product-snapshot";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ComparisonGrid } from "@/components/comparison-grid";
+import { getPackRequestHref } from "@/lib/packs";
 
 const workflows = [
   {
@@ -21,6 +22,45 @@ const workflows = [
     title: "Safety-case summarisation support",
     description:
       "Support bounded summarisation workflows with oversight, review steps, and evidence around the process.",
+  },
+];
+
+const valueStats = [
+  {
+    value: "$60bn-$110bn",
+    label: "annual gen-AI value potential",
+    detail:
+      "McKinsey estimates generative AI could create significant annual value across pharma and medical products, with R&D and clinical development among the areas of interest.",
+    implication: "The adoption pressure is real, but life sciences teams need controlled workflows rather than broad automation promises.",
+    source: "McKinsey, generative AI in pharma",
+    href: "https://www.mckinsey.com/industries/life-sciences/our-insights/generative-ai-in-the-pharmaceutical-industry-moving-from-hype-to-reality",
+  },
+  {
+    value: "57%",
+    label: "of protocols had a substantial amendment",
+    detail:
+      "Tufts CSDD research found substantial protocol amendments were common, and nearly half were deemed avoidable by sponsors.",
+    implication: "Better structure around review, escalation, and evidence can reduce friction when operational changes need to be understood later.",
+    source: "Tufts CSDD protocol amendment analysis",
+    href: "https://www.globenewswire.com/news-release/2016/01/14/1187511/0/en/Protocol-Amendments-Improve-Elements-of-Clinical-Trial-Feasibility-But-at-High-Economic-and-Cycle-Time-Cost-According-to-the-Tufts-Center-for-the-Study-of-Drug-Development.html",
+  },
+  {
+    value: "$141k-$535k",
+    label: "median direct amendment cost",
+    detail:
+      "The same Tufts CSDD analysis reported median direct costs of $141k for Phase II and $535k for Phase III substantial amendments.",
+    implication: "Corentis does not prevent protocol change, but it can help teams keep operational review, sign-off, and evidence clearer around bounded workflows.",
+    source: "Tufts CSDD protocol amendment analysis",
+    href: "https://www.globenewswire.com/news-release/2016/01/14/1187511/0/en/Protocol-Amendments-Improve-Elements-of-Clinical-Trial-Feasibility-But-at-High-Economic-and-Cycle-Time-Cost-According-to-the-Tufts-Center-for-the-Study-of-Drug-Development.html",
+  },
+  {
+    value: "Audit trails",
+    label: "must stay interpretable",
+    detail:
+      "ICH E6(R3) data-governance guidance emphasises traceability, metadata, review of audit trails, and documented processes across the data lifecycle.",
+    implication: "That is the environment Corentis is designed for: AI-supported work with visible controls, human review, and evidence that can be inspected.",
+    source: "ICH E6(R3) Step 4 final guideline",
+    href: "https://database.ich.org/sites/default/files/ICH_E6%28R3%29_Step4_FinalGuideline_2025_0106.pdf",
   },
 ];
 
@@ -61,9 +101,35 @@ export default function LifeSciencesPage() {
         description="Life sciences teams work in environments where rigour, traceability, and careful review matter. Corentis helps organisations introduce AI into selected operational workflows with testing, oversight, and evidence around the process."
         imageSrc="/images/clinical-lab.jpg"
         imageAlt="Researchers working in a clinical laboratory"
-        ctaHref="/contact/"
-        ctaLabel="Request sector overview"
+        ctaHref={getPackRequestHref("life-sciences-brief")}
+        ctaLabel="Request life sciences brief"
       />
+
+      <section className="border-b border-white/8 bg-[rgba(255,255,255,0.02)] py-16 sm:py-20">
+        <Container>
+          <SectionHeading
+            eyebrow="Where The Value Lies"
+            title="Useful AI still needs review, traceability, and evidence"
+            description="Life sciences organisations are under pressure to use AI in practical operational work, but the value only lands when the surrounding process remains bounded, reviewable, and suitable for regulated environments."
+          />
+          <div className="mt-12 grid gap-5 lg:grid-cols-4">
+            {valueStats.map((item) => (
+              <article key={item.label} className="glass-panel reveal-card flex h-full flex-col p-6">
+                <p className="text-3xl font-semibold tracking-[-0.04em] text-white">{item.value}</p>
+                <h2 className="mt-3 text-base font-semibold text-[var(--color-near-white)]">{item.label}</h2>
+                <p className="mt-4 text-sm leading-7 text-[var(--color-text-muted)]">{item.detail}</p>
+                <p className="mt-4 text-sm leading-7 text-[var(--color-electric-soft)]">{item.implication}</p>
+                <a
+                  href={item.href}
+                  className="mt-auto pt-5 text-xs font-semibold uppercase tracking-[0.2em] text-white/45 transition hover:text-[var(--color-electric)]"
+                >
+                  Source: {item.source}
+                </a>
+              </article>
+            ))}
+          </div>
+        </Container>
+      </section>
 
       <section className="py-20 sm:py-24">
         <Container>

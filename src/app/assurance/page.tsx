@@ -3,12 +3,14 @@ import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { StageGrid } from "@/components/stage-grid";
 import { ProductSnapshot } from "@/components/product-snapshot";
+import { Button } from "@/components/ui/button";
+import { getPackRequestHref } from "@/lib/packs";
 
 const assuranceFlow = [
   {
     label: "01",
     title: "Workflow is defined",
-    description: "The use case, policy conditions, and points of human oversight are made explicit before live use begins.",
+    description: "The use case, policy conditions, and points of human oversight are made explicit before operational use begins.",
   },
   {
     label: "02",
@@ -30,13 +32,13 @@ const assuranceFlow = [
 const stageItems = [
   {
     label: "Current stage",
-    title: "Early product direction",
-    description: "Corentis is being presented at an early stage with a careful, bounded claim posture.",
+    title: "Early product direction with a working V1 demo",
+    description: "Corentis is being presented at an early stage with a careful, bounded claim posture and a working local V1 demo in financial services.",
   },
   {
     label: "Exists now",
-    title: "Illustrative governance views",
-    description: "The current materials show prototype process logic, worked examples, and sample evidence framing rather than claiming live customer deployment.",
+    title: "Illustrative governance views plus interactive workflow proof",
+    description: "The current materials show prototype process logic, a working local complaints-assistant demo, worked examples, and sample evidence framing rather than claiming live customer deployment.",
   },
   {
     label: "Designed to do",
@@ -62,10 +64,10 @@ export default function AssurancePage() {
     <>
       <PageHero
         eyebrow="Assurance Overview"
-        title="Responsible deployment needs operational control, not just good intentions."
-        description="Corentis is being built to help organisations deploy AI in regulated workflows with clearer governance, human oversight, and evidence that can support practical accountability."
-        ctaHref="/contact/"
-        ctaLabel="Request governance summary"
+        title="Designed for the assurance gap between AI capability and operational approval."
+        description="Corentis is being built to help organisations deploy AI in regulated workflows with clearer governance, human oversight, and evidence that can support practical accountability. Policy Composer is the mechanism that turns written policy into visible workflow controls."
+        ctaHref={getPackRequestHref("assurance-summary")}
+        ctaLabel="Request assurance summary"
       />
 
       <section className="py-20 sm:py-24">
@@ -76,6 +78,11 @@ export default function AssurancePage() {
               <p>
                 As AI moves into more important work, organisations need more than raw capability. They need a way to
                 make deployment visible, bounded, reviewable, and easier to justify.
+              </p>
+              <p>
+                Corentis is designed for the assurance gap between AI capability and operational approval: the space
+                where teams need enough evidence, review structure, and control visibility to decide whether a workflow
+                should proceed.
               </p>
               <p>
                 Without that structure, useful pilots can stall, governance teams struggle to assess what is happening,
@@ -93,7 +100,8 @@ export default function AssurancePage() {
               </p>
               <p>
                 The aim is practical accountability: clearer control visibility for organisations and review-ready
-                outputs for the people asked to assess what happened.
+                outputs for the people asked to assess what happened. Policy Composer helps by translating plain-English
+                policy into review gates, escalation logic, blocked actions, and evidence requirements.
               </p>
             </div>
           </div>
@@ -145,7 +153,7 @@ export default function AssurancePage() {
                 {
                   label: "Controls",
                   title: "Workflow conditions mapped",
-                  detail: "Policy rules, review requirements, and escalation logic are attached to the workflow before live use.",
+                  detail: "Policy rules, review requirements, blocked actions, and escalation logic are attached to the workflow before operational use.",
                   value: "Visible",
                 },
                 {
@@ -163,12 +171,12 @@ export default function AssurancePage() {
                 {
                   label: "Evidence",
                   title: "Exports support later review",
-                  detail: "Review packs can be shaped for governance meetings, procurement review, internal assurance, or audit support.",
+                  detail: "Review packs and Evidence Vault artefacts can be shaped for governance meetings, procurement review, internal assurance, or audit support.",
                   value: "Review-ready",
                 },
               ]}
               events={[
-                "Sensitive action routed to approval gate",
+                "Sensitive action routed to approval gate and unsafe direct send blocked",
                 "Runtime exception preserved with review context",
                 "Evidence bundle prepared for assurance discussion",
               ]}
@@ -194,6 +202,7 @@ export default function AssurancePage() {
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--color-electric-soft)]">What Corentis Is</p>
             <ul className="mt-6 space-y-3 text-sm leading-7 text-[var(--color-text-muted)]">
               <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">A governance and assurance layer around AI-supported workflows</li>
+              <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">A way to turn plain-English policy into operational controls, review gates, escalation logic, and evidence requirements</li>
               <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">A way to add human oversight, review gates, and clearer deployment discipline</li>
               <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">A source of review-ready outputs that support accountability and audit support</li>
             </ul>
@@ -203,8 +212,10 @@ export default function AssurancePage() {
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--color-electric-soft)]">What Corentis Is Not</p>
             <ul className="mt-6 space-y-3 text-sm leading-7 text-[var(--color-text-muted)]">
               <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">Not a claim that regulation can be automated away</li>
+              <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">Not evidence of live customer deployment or production operation</li>
               <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">Not a generic promise that AI can be trusted without careful workflow design</li>
               <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">Not a substitute for human accountability in important deployment decisions</li>
+              <li className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3">Not regulatory approval, endorsement, or a replacement for legal or compliance judgement</li>
             </ul>
           </div>
         </Container>
@@ -258,6 +269,28 @@ export default function AssurancePage() {
                 Corentis is being built to help meet that need in a way that is commercially useful, operationally
                 grounded, and careful in its claims.
               </p>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <section className="py-20 sm:py-24">
+        <Container>
+          <div className="glass-panel p-6 sm:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--color-electric-soft)]">Next Step</p>
+            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-white">
+              Continue with an assurance-focused discussion if the control posture looks credible.
+            </h2>
+            <p className="mt-6 max-w-3xl text-sm leading-7 text-[var(--color-text-muted)]">
+              The most useful next conversation is usually about policy-to-control translation, human oversight points, evidence expectations, and why the current scope is deliberately bounded.
+            </p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <Button href={getPackRequestHref("assurance-summary")} className="w-full sm:w-auto">
+                Request assurance summary
+              </Button>
+              <Button href="/contact/" variant="secondary" className="w-full sm:w-auto">
+                Discuss design partnership
+              </Button>
             </div>
           </div>
         </Container>

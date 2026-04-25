@@ -6,8 +6,8 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="About"
-        title="Infrastructure for safer AI deployment"
-        description="Corentis is building the policy plane for regulated AI: infrastructure that helps organisations deploy advanced AI in high-stakes workflows with greater visibility, stronger oversight, and clearer evidence."
+        title="Infrastructure for governed AI deployment"
+        description="Corentis is building the policy-control and evidence layer for regulated AI: infrastructure that helps organisations connect policy, human review, escalation, and evidence in high-stakes workflows."
         ctaHref="/contact/"
         ctaLabel="Speak with us"
       />
@@ -19,8 +19,8 @@ export default function AboutPage() {
             <div className="mt-6 space-y-4 text-sm leading-7 text-[var(--color-text-muted)]">
               <p>We believe the next phase of AI adoption will be defined not only by capability, but by confidence.</p>
               <p>
-                Organisations will need infrastructure that helps them test, approve, monitor, and evidence how AI is
-                used in important work. That need is especially clear in regulated environments, where trust cannot
+                Organisations will need infrastructure that helps them turn policy into controls, apply human review,
+                trigger escalation, and evidence how AI is used in important work. That need is especially clear in regulated environments, where trust cannot
                 rest on good intentions alone.
               </p>
               <p>

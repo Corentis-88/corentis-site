@@ -1,9 +1,9 @@
 const steps = [
-  "Model and workflow inventory",
-  "Scenario testing and policy evaluation",
-  "Human approval on sensitive actions",
-  "Runtime monitoring in production",
-  "Exported evidence for assurance teams",
+  "A complaint enters the workflow",
+  "Corentis finds the right policy",
+  "The right controls are applied",
+  "Unsafe direct send is blocked",
+  "A clear evidence trail is kept",
 ];
 
 export function HeroArchitecture() {
@@ -14,13 +14,13 @@ export function HeroArchitecture() {
         <div className="flex flex-col gap-4 border-b border-white/10 pb-5 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--color-electric-soft)]">
-              Illustrative Control Plane View
+              How Corentis works
             </p>
             <p className="mt-3 max-w-xl text-sm leading-7 text-[var(--color-text-muted)]">
-              A prototype-style view of how testing, approvals, runtime signals, and evidence can sit around one workflow.
+              A simple view of how Corentis guides one complaint from policy to action. It identifies the right policy, applies the right controls, blocks unsafe actions, and keeps a clear evidence trail.
             </p>
           </div>
-          <div className="status-pill w-fit">Prototype surface</div>
+          <div className="status-pill w-fit">V1 demo view</div>
         </div>
         <div className="mt-6 grid gap-4">
           {steps.map((step, index) => (
@@ -37,9 +37,9 @@ export function HeroArchitecture() {
         </div>
         <div className="mt-6 grid gap-3 sm:grid-cols-3">
           {[
-            ["Controls mapped", "12"],
-            ["Review gates", "4"],
-            ["Evidence formats", "PDF / JSON"],
+            ["Policy matched", "Right rulebook"],
+            ["Action checked", "Review or escalation"],
+            ["Evidence kept", "Clear record"],
           ].map(([label, value]) => (
             <div key={label} className="product-tile px-4 py-3">
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/40">{label}</p>

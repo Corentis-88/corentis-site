@@ -1,24 +1,24 @@
 const steps = [
   {
     title: "Case enters workflow",
-    detail: "A complaint, draft communication, or escalation candidate enters an AI-enabled operational flow.",
+    detail: "A customer complaint enters the workflow and the assistant prepares an initial handling path.",
   },
   {
-    title: "AI proposes an output",
-    detail: "An existing model or workflow engine suggests a category, route, draft, or summary.",
+    title: "Relevant policy is identified",
+    detail: "Corentis identifies the complaints policy that applies to the case instead of leaving that interpretation implicit.",
   },
   {
-    title: "Corentis applies controls",
-    detail: "Policy checks, review gates, escalation rules, and evidence capture are applied around the workflow.",
+    title: "Structured control plan is applied",
+    detail: "Policy checks, advisor guidance, review gates, escalation logic, and evidence requirements are attached to the workflow.",
     active: true,
   },
   {
-    title: "Human review where needed",
-    detail: "Named reviewers approve, override, reject, or escalate cases that cross defined thresholds.",
+    title: "Unsafe direct send is blocked",
+    detail: "Where human approval is required, the workflow stops, routes to a named reviewer, and surfaces the reason clearly.",
   },
   {
-    title: "Decision and evidence export",
-    detail: "The workflow proceeds with a clearer record of checks, approvals, exceptions, and supporting evidence.",
+    title: "Escalation and Evidence Vault update",
+    detail: "Vulnerable-customer escalation is triggered where needed and the evidence trail is persisted for later review.",
   },
 ];
 
@@ -31,7 +31,7 @@ export function FinancialWorkflowDiagram() {
             Illustrative workflow diagram
           </p>
           <h3 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-white">
-            Where Corentis fits in an AI-enabled financial workflow
+            Where Corentis fits in the V1 complaints-assistant walkthrough
           </h3>
         </div>
         <div className="w-fit rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs font-medium text-white/70">
@@ -47,8 +47,8 @@ export function FinancialWorkflowDiagram() {
           <div className="mt-4 space-y-3">
             {[
               "Operations team or service owner",
-              "Existing AI-enabled workflow",
-              "Corentis control layer",
+              "AI-assisted complaints workflow",
+              "Corentis policy and control layer",
               "Named reviewers and escalation owners",
             ].map((role) => (
               <div key={role} className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3 text-sm leading-6 text-white/82">
@@ -84,9 +84,9 @@ export function FinancialWorkflowDiagram() {
 
       <div className="mt-6 grid gap-3 sm:grid-cols-3">
         {[
-          ["Policy checks", "Configured around the workflow"],
-          ["Review gates", "Triggered by threshold or case type"],
-          ["Evidence export", "Supports QA, risk, and compliance review"],
+          ["Policy Composer", "Turns plain-English complaints policy into workflow controls"],
+          ["Approval block", "Direct send is stopped where human review is required"],
+          ["Evidence Vault", "Persists review-ready artefacts for later scrutiny"],
         ].map(([label, detail]) => (
           <div key={label} className="product-tile px-4 py-3">
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/40">{label}</p>

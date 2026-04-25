@@ -1,10 +1,19 @@
 "use client";
 
-import { type FormEvent, type KeyboardEvent, useEffect, useId, useMemo, useRef, useState } from "react";
+import { type FormEvent, type KeyboardEvent, useEffect, useId, useRef, useState } from "react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { CheckCircle2, ChevronDown, LoaderCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { interestTypes } from "@/lib/site";
+import {
+  getPackByRequestType,
+  getPackBySlug,
+  getRequestOptionBySlug,
+  getRequestOptionByType,
+  requestTypes,
+  type RequestType,
+} from "@/lib/packs";
 
 type FormState = {
   firstName: string;
@@ -31,20 +40,52 @@ const initialState: FormState = {
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 export function ContactForm() {
+  const searchParams = useSearchParams();
   const [form, setForm] = useState<FormState>(initialState);
   const [errors, setErrors] = useState<ErrorState>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [fulfilledRequestType, setFulfilledRequestType] = useState<RequestType | null>(null);
 
   const endpoint = process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT?.trim() ?? "";
   const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? "";
   const endpointConfigured = endpoint.length > 0;
+  const selectedRequest = getRequestOptionByType(form.interestType);
+  const selectedPack = getPackByRequestType(form.interestType);
+  const selectedDestination = selectedPack?.downloadHref ?? selectedRequest?.successHref ?? "";
+  const fulfilledRequest = getRequestOptionByType(fulfilledRequestType);
+  const fulfilledPack = getPackByRequestType(fulfilledRequestType);
 
-  const formHint = useMemo(
-    () =>
-      "Whether you want an investor overview, an assurance summary, a sector walkthrough, or a partnership conversation, we would be glad to hear from you.",
-    [],
-  );
+  function updateFormField<K extends keyof FormState>(key: K, value: FormState[K]) {
+    setForm((current) => ({ ...current, [key]: value }));
+
+    if (status !== "idle") {
+      setStatus("idle");
+      setMessage("");
+      setFulfilledRequestType(null);
+    }
+  }
+
+  useEffect(() => {
+    const requestedSlug = searchParams.get("pack");
+    const requestedPack = getPackBySlug(requestedSlug);
+    const requestedOption = requestedPack ?? getRequestOptionBySlug(searchParams.get("request"));
+
+    if (!requestedOption) {
+      return;
+    }
+
+    setForm((current) => {
+      if (current.interestType === requestedOption.requestType) {
+        return current;
+      }
+
+      return {
+        ...current,
+        interestType: requestedOption.requestType,
+      };
+    });
+  }, [searchParams]);
 
   function validate(state: FormState) {
     const nextErrors: ErrorState = {};
@@ -101,13 +142,22 @@ export function ContactForm() {
 
     try {
       const formData = new FormData(event.currentTarget);
+      const requestedPack = getPackByRequestType(form.interestType);
+      const requestedOption = getRequestOptionByType(form.interestType);
+      const intendedDestination = requestedPack?.downloadHref ?? requestedOption?.successHref ?? "";
+      const sourcePage = typeof window !== "undefined" ? `${window.location.pathname}${window.location.search}` : "";
       formData.set("first_name", form.firstName.trim());
       formData.set("last_name", form.lastName.trim());
       formData.set("email", form.email.trim());
       formData.set("organisation", form.organisation.trim());
       formData.set("interest_type", form.interestType.trim());
+      formData.set("audience", form.interestType.trim());
       formData.set("message", form.message.trim());
       formData.set("consent", form.consent ? "yes" : "no");
+      formData.set("requested_pack", requestedPack?.title ?? "");
+      formData.set("selected_pack", requestedPack?.title ?? "No PDF requested");
+      formData.set("intended_download_page", intendedDestination);
+      formData.set("source_page", sourcePage);
 
       const response = await fetch(endpoint, {
         method: "POST",
@@ -144,7 +194,8 @@ export function ContactForm() {
       }
 
       setStatus("success");
-      setMessage("Thank you. Your details have been received, and we will be in touch when there is something useful to share.");
+      setFulfilledRequestType(form.interestType as RequestType);
+      setMessage("");
       setForm(initialState);
       setErrors({});
     } catch (error) {
@@ -158,11 +209,30 @@ export function ContactForm() {
   }
 
   return (
-    <div className="glass-panel p-6 sm:p-8">
+    <div id="request-form" className="glass-panel p-6 sm:p-8">
       <div className="mb-8">
         <div>
-          <h2 className="text-2xl font-semibold tracking-[-0.04em] text-white">Request an overview</h2>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-[var(--color-text-muted)]">{formHint}</p>
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <h2 className="text-2xl font-semibold tracking-[-0.04em] text-white">
+                {selectedRequest?.formHeading ?? "Request a Corentis overview"}
+              </h2>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-[var(--color-text-muted)]">
+                {selectedRequest?.formHint ??
+                  "Request the pack or conversation most relevant to you and, after submission, we will route you to the right material here on the page."}
+              </p>
+            </div>
+            {selectedRequest ? <div className="status-pill w-fit">Request selected</div> : null}
+          </div>
+          {selectedRequest?.packSlug ? (
+            <div className="mt-5 rounded-[1.4rem] border border-[rgba(73,166,255,0.2)] bg-[rgba(73,166,255,0.08)] px-4 py-4 sm:px-5">
+              <p className="text-sm font-medium text-white">How access works</p>
+              <p className="mt-2 text-sm leading-7 text-[var(--color-text-muted)]">
+                Complete your details below and, once the form is submitted successfully, the requested PDF will be
+                available immediately here for download.
+              </p>
+            </div>
+          ) : null}
         </div>
       </div>
 
@@ -179,14 +249,14 @@ export function ContactForm() {
             name="first_name"
             value={form.firstName}
             error={errors.firstName}
-            onChange={(value) => setForm((current) => ({ ...current, firstName: value }))}
+            onChange={(value) => updateFormField("firstName", value)}
           />
           <Field
             label="Last name"
             name="last_name"
             value={form.lastName}
             error={errors.lastName}
-            onChange={(value) => setForm((current) => ({ ...current, lastName: value }))}
+            onChange={(value) => updateFormField("lastName", value)}
           />
         </div>
 
@@ -197,29 +267,33 @@ export function ContactForm() {
             type="email"
             value={form.email}
             error={errors.email}
-            onChange={(value) => setForm((current) => ({ ...current, email: value }))}
+            onChange={(value) => updateFormField("email", value)}
           />
           <Field
             label="Organisation"
             name="organisation"
             value={form.organisation}
             error={errors.organisation}
-            onChange={(value) => setForm((current) => ({ ...current, organisation: value }))}
+            onChange={(value) => updateFormField("organisation", value)}
           />
         </div>
 
         <InterestTypeField
           value={form.interestType}
           error={errors.interestType}
-          onChange={(value) => setForm((current) => ({ ...current, interestType: value }))}
+          onChange={(value) => updateFormField("interestType", value)}
         />
+        <input type="hidden" name="requested_pack" value={selectedPack?.title ?? ""} />
+        <input type="hidden" name="audience" value={form.interestType} />
+        <input type="hidden" name="selected_pack" value={selectedPack?.title ?? "No PDF requested"} />
+        <input type="hidden" name="intended_download_page" value={selectedDestination} />
 
         <label className="grid gap-2.5">
           <span className="text-sm font-medium text-white">Message</span>
           <textarea
             name="message"
             value={form.message}
-            onChange={(event) => setForm((current) => ({ ...current, message: event.target.value }))}
+            onChange={(event) => updateFormField("message", event.target.value)}
             className="input-shell min-h-36 resize-y"
             placeholder="Tell us what you are exploring, where you are in the process, or what kind of conversation would be helpful."
           />
@@ -243,7 +317,7 @@ export function ContactForm() {
             type="checkbox"
             name="consent"
             checked={form.consent}
-            onChange={(event) => setForm((current) => ({ ...current, consent: event.target.checked }))}
+            onChange={(event) => updateFormField("consent", event.target.checked)}
             className="mt-1 h-4 w-4 rounded border-white/20 bg-transparent text-[var(--color-electric)]"
           />
           <span>
@@ -266,7 +340,7 @@ export function ContactForm() {
                 Sending
               </span>
             ) : (
-              "Request overview"
+              selectedRequest?.ctaLabel ?? "Request overview"
             )}
           </Button>
 
@@ -279,6 +353,75 @@ export function ContactForm() {
             ) : null}
           </div>
         </div>
+
+        {status === "success" && fulfilledRequest?.packSlug && fulfilledPack ? (
+          <div className="rounded-[1.5rem] border border-[rgba(73,166,255,0.24)] bg-[linear-gradient(180deg,rgba(16,38,82,0.9),rgba(7,20,46,0.88))] p-5 sm:p-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-electric-soft)]">
+                  Requested Material
+                </p>
+                <h3 className="mt-3 text-xl font-semibold text-white">
+                  {fulfilledRequest.successHeading}
+                </h3>
+                <p className="mt-3 max-w-2xl text-sm leading-7 text-[var(--color-text-muted)]">
+                  {fulfilledRequest.successDescription}
+                </p>
+                <p className="mt-3 max-w-2xl text-sm leading-7 text-white/72">{fulfilledRequest.successFollowUp}</p>
+              </div>
+              <div className="status-pill w-fit">Available now</div>
+            </div>
+            <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+              <a
+                href={fulfilledPack.downloadHref}
+                download={fulfilledPack.fileName}
+                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[linear-gradient(135deg,var(--color-cobalt),var(--color-electric))] px-5 py-3 text-sm font-semibold tracking-[0.01em] text-[var(--color-near-white)] shadow-[0_20px_60px_rgba(73,166,255,0.22)] transition duration-300 hover:brightness-110 hover:shadow-[0_24px_80px_rgba(73,166,255,0.3)]"
+              >
+                {fulfilledRequest.successLabel}
+              </a>
+              <Link
+                href="/privacy/"
+                className="inline-flex min-h-12 items-center justify-center rounded-full border border-[rgba(26,49,95,0.95)] bg-[rgba(10,30,70,0.55)] px-5 py-3 text-sm font-semibold tracking-[0.01em] text-[var(--color-near-white)] transition duration-300 hover:border-[rgba(73,166,255,0.4)] hover:bg-[rgba(10,30,70,0.72)]"
+              >
+                Review privacy notice
+              </Link>
+            </div>
+          </div>
+        ) : null}
+
+        {status === "success" && !fulfilledRequest?.packSlug ? (
+          <div className="rounded-[1.5rem] border border-[rgba(73,166,255,0.24)] bg-[linear-gradient(180deg,rgba(16,38,82,0.9),rgba(7,20,46,0.88))] p-5 sm:p-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-electric-soft)]">
+                  Conversation Requested
+                </p>
+                <h3 className="mt-3 text-xl font-semibold text-white">
+                  {fulfilledRequest?.successHeading ?? "Thank you. Your message has been received"}
+                </h3>
+                <p className="mt-3 max-w-2xl text-sm leading-7 text-[var(--color-text-muted)]">
+                  {fulfilledRequest?.successDescription}
+                </p>
+                <p className="mt-3 max-w-2xl text-sm leading-7 text-white/72">{fulfilledRequest?.successFollowUp}</p>
+              </div>
+              <div className="status-pill w-fit">Conversation queued</div>
+            </div>
+            <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href={fulfilledRequest?.successHref ?? "/platform/"}
+                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[linear-gradient(135deg,var(--color-cobalt),var(--color-electric))] px-5 py-3 text-sm font-semibold tracking-[0.01em] text-[var(--color-near-white)] shadow-[0_20px_60px_rgba(73,166,255,0.22)] transition duration-300 hover:brightness-110 hover:shadow-[0_24px_80px_rgba(73,166,255,0.3)]"
+              >
+                {fulfilledRequest?.successLabel ?? "Explore the platform"}
+              </Link>
+              <Link
+                href="/privacy/"
+                className="inline-flex min-h-12 items-center justify-center rounded-full border border-[rgba(26,49,95,0.95)] bg-[rgba(10,30,70,0.55)] px-5 py-3 text-sm font-semibold tracking-[0.01em] text-[var(--color-near-white)] transition duration-300 hover:border-[rgba(73,166,255,0.4)] hover:bg-[rgba(10,30,70,0.72)]"
+              >
+                Review privacy notice
+              </Link>
+            </div>
+          </div>
+        ) : null}
 
       </form>
     </div>
@@ -295,7 +438,7 @@ function InterestTypeField({
   onChange: (value: string) => void;
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(() => Math.max(0, interestTypes.findIndex((item) => item === value)));
+  const [activeIndex, setActiveIndex] = useState(() => Math.max(0, requestTypes.findIndex((item) => item === value)));
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const listboxId = useId();
@@ -330,7 +473,7 @@ function InterestTypeField({
   }, [isOpen]);
 
   useEffect(() => {
-    const selectedIndex = interestTypes.findIndex((item) => item === value);
+    const selectedIndex = requestTypes.findIndex((item) => item === value);
     setActiveIndex(selectedIndex >= 0 ? selectedIndex : 0);
   }, [value]);
 
@@ -351,8 +494,8 @@ function InterestTypeField({
 
       const direction = event.key === "ArrowDown" ? 1 : -1;
       setActiveIndex((current) => {
-        const nextIndex = (current + direction + interestTypes.length) % interestTypes.length;
-        onChange(interestTypes[nextIndex]);
+        const nextIndex = (current + direction + requestTypes.length) % requestTypes.length;
+        onChange(requestTypes[nextIndex]);
         return nextIndex;
       });
       return;
@@ -366,7 +509,7 @@ function InterestTypeField({
 
   return (
     <div className="grid gap-2.5" ref={containerRef}>
-      <span className="text-sm font-medium text-white">Interest type</span>
+      <span className="text-sm font-medium text-white">Requested pack or conversation</span>
       <input name="interest_type" type="hidden" value={value} />
       <button
         ref={buttonRef}
@@ -396,7 +539,7 @@ function InterestTypeField({
           aria-label="Interest type"
           className="overflow-hidden rounded-[1.25rem] border border-[rgba(73,166,255,0.22)] bg-[rgba(6,20,48,0.98)] p-2 shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-xl"
         >
-          {interestTypes.map((item, index) => {
+          {requestTypes.map((item, index) => {
             const isSelected = item === value;
 
             return (

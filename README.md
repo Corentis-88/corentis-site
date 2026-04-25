@@ -7,9 +7,11 @@ Premium launch site for Corentis, built with Next.js, TypeScript, and Tailwind C
 - Home
 - Platform
 - Financial Services
-- Clinical Trials
-- About
-- Contact / Register Interest
+- Life Sciences
+- Investors
+- Assurance
+- Government / Funding Readiness
+- Contact
 - Privacy Notice
 - Cookie Policy
 - Terms of Use
@@ -73,7 +75,9 @@ Cloudflare notes:
 
 ## Form wiring
 
-The Contact / Register Interest form is wired to Formspree through `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT` and remains compatible with static export on Cloudflare Pages.
+The Contact form is wired to Formspree through `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT` and remains compatible with static export on Cloudflare Pages.
+
+The same form is also the gated request path for Corentis PDF packs. Pack CTAs route to the contact page with the relevant request type preselected. After a successful submission, the requested pack is revealed immediately in the success state as a download link.
 
 ### Configure the endpoint
 
@@ -103,6 +107,11 @@ The form submits these exact field names to Formspree:
 - `interest_type`
 - `message`
 - `consent`
+- `requested_pack`
+- `selected_pack`
+- `audience`
+- `intended_download_page`
+- `source_page`
 
 ### How submission works
 
@@ -110,12 +119,18 @@ The form submits these exact field names to Formspree:
 - The form uses the actual browser form element as the payload source and posts it to Formspree with `fetch` using `FormData`.
 - Requests are sent with `Accept: application/json` so the site can show inline success and error states.
 - If the endpoint is missing, the submit button is disabled and the page shows a clean inline message instead of pretending to submit.
+- Pack request links use the query pattern `/contact/?pack=<pack-slug>#request-form`.
+- Non-PDF audience requests use the query pattern `/contact/?request=<request-slug>#request-form`.
+- When a matching pack slug is present, the relevant request type is preselected in the form.
+- Request types, pack slugs, success-state copy, and revealed downloads are controlled by one central mapping in `src/lib/packs.ts`.
+- After a successful request for a pack, the matching PDF download button is revealed immediately in a request-specific success state.
+- Government / funding readiness requests route to the dedicated funding-readiness page after submission rather than revealing a PDF.
+- Conversation-only requests such as `Design partnership or other conversation` stay in the normal contact flow and do not reveal a PDF.
 
 ### Development checks
 
 In development only:
 
-- the form shows a small status line at the bottom saying `Form endpoint loaded` or `Form endpoint missing`
 - the browser console logs:
   - `form submit fired`
   - whether the endpoint value is present or missing
@@ -125,17 +140,40 @@ In development only:
 
 1. Set a real Formspree endpoint in `.env.local`.
 2. Start the site with `npm run dev`.
-3. Open the Contact page and confirm the debug line says `Form endpoint loaded`.
+3. Open the Contact page and choose one of the request paths.
 4. Submit the form with values in every field.
 5. Confirm:
    - the submit button enters the loading state
    - the success message appears
+   - if a pack request was selected, the correct PDF download button appears
    - the submission appears in Formspree Submissions
 6. Open browser devtools and confirm the console logs the submit event and POST success.
 7. To test missing endpoint handling, remove `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT`, restart the dev server, and confirm:
-   - the debug line says `Form endpoint missing`
    - the submit button is disabled
    - the inline missing-endpoint message is shown
+
+## PDF pack system
+
+Corentis includes a small downloadable PDF library:
+
+- `public/packs/corentis-investor-overview.pdf`
+- `public/packs/corentis-assurance-governance-summary.pdf`
+- `public/packs/corentis-financial-services-workflow-brief.pdf`
+- `public/packs/corentis-life-sciences-bounded-use-case-brief.pdf`
+- `public/packs/corentis-sample-evidence-pack.pdf`
+
+### Source and generation
+
+- Maintainable source generator: `tools/generate_pdf_packs.py`
+- Output folder: `public/packs/`
+
+Regenerate the packs with:
+
+```bash
+C:\Users\coren\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe tools/generate_pdf_packs.py
+```
+
+The generator uses ReportLab and the existing Corentis brand assets and approved editorial imagery. The PDFs are designed to preserve stage honesty by clearly labeling illustrative, prototype, and sample material where appropriate.
 
 ## Cookie consent and optional scripts
 
@@ -149,7 +187,7 @@ In development only:
   Use the full Formspree endpoint URL, for example `https://formspree.io/f/yourFormId`.
 
 - `NEXT_PUBLIC_TURNSTILE_SITE_KEY`
-  Optional. The UI includes a clear placeholder block showing where Turnstile will be swapped in later.
+  Optional. When configured, the form shows the Turnstile integration slot used for verification.
 
 - `NEXT_PUBLIC_OPTIONAL_SCRIPT_SRC`
   Optional. Reserved for a future non-essential external script. It will only load after cookie consent is given.
@@ -172,11 +210,13 @@ In development only:
 ```text
 src/
   app/
-    about/
-    clinical-trials/
+    assurance/
     contact/
     cookies/
     financial-services/
+    government-funding/
+    investors/
+    life-sciences/
     platform/
     privacy/
     terms/
@@ -198,4 +238,7 @@ src/
 public/
   brand/
   images/
+  packs/
+tools/
+  generate_pdf_packs.py
 ```

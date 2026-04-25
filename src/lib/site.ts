@@ -1,9 +1,9 @@
 export const siteConfig = {
   name: "Corentis",
   shortName: "Corentis",
-  title: "Corentis | The policy plane for regulated AI",
+  title: "Corentis | Turn AI policy into governed action",
   description:
-    "Corentis is the control and assurance layer for regulated AI deployment, helping organisations govern high-stakes workflows with testing, approvals, monitoring, and evidence.",
+    "Corentis is the policy-control and evidence layer for AI-assisted regulated workflows, helping organisations connect policy, review gates, escalation logic, and evidence.",
   url: "https://corentis.ai",
   email: "hello@corentis.co.uk",
 };
@@ -14,14 +14,15 @@ export const navigation = [
   { href: "/financial-services/", label: "Financial Services" },
   { href: "/life-sciences/", label: "Life Sciences" },
   { href: "/investors/", label: "Investors" },
+  { href: "/government-funding/", label: "Funding" },
   { href: "/contact/", label: "Contact" },
 ];
 
 export const platformModules = [
   {
-    title: "Pre-deployment testing",
+    title: "Policy Composer",
     description:
-      "Stress prompts, edge cases, and workflow scenarios before a model touches production work.",
+      "Convert plain-English policy into operational control plans for AI-assisted work.",
   },
   {
     title: "Human approval workflows",
@@ -29,9 +30,9 @@ export const platformModules = [
       "Route sensitive outputs to named reviewers with thresholds, escalation paths, and recorded decisions.",
   },
   {
-    title: "Runtime monitoring",
+    title: "Workflow visibility",
     description:
-      "Track live AI behaviour, intervene when policy conditions fail, and preserve context around every event.",
+      "Track workflow events, interventions, exceptions, and review activity without relying on retrospective reconstruction.",
   },
   {
     title: "Policy and control mapping",
@@ -51,11 +52,13 @@ export const platformModules = [
 ];
 
 export const interestTypes = [
-  "Financial Services",
-  "Clinical Trials",
-  "Investor",
-  "Partner",
-  "Other",
+  "Investor overview",
+  "Assurance / governance summary",
+  "Government / funding readiness",
+  "Financial services workflow brief",
+  "Life sciences bounded use case brief",
+  "Sample evidence pack",
+  "Design partnership or other conversation",
 ] as const;
 
 export type InterestType = (typeof interestTypes)[number];
