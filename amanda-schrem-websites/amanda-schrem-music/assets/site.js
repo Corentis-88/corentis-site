@@ -33,7 +33,7 @@ document.querySelectorAll("[data-lead-form]").forEach((form) => {
     });
     const status = form.querySelector("[data-form-status]");
     if (status) {
-      status.textContent = "Thanks. Amanda will be able to follow this up when enquiries are connected for launch.";
+      status.textContent = "Thanks. Amanda will get back to you as soon as possible.";
     }
   });
 });
@@ -53,9 +53,9 @@ document.querySelectorAll("[data-chat-reply]").forEach((button) => {
   button.addEventListener("click", () => {
     const key = button.dataset.chatReply;
     const answers = {
-      prices: "30 minute lessons are planned from GBP 24-27, 45 minutes from GBP 36-40, and 60 minute lessons from GBP 45-50 depending on instrument and travel.",
-      areas: "Amanda is positioned for Stockport, Cheadle, Cheadle Hulme, Bramhall, Hazel Grove, Sale, Altrincham and selected South Manchester areas.",
-      trial: "The best next step is a short call to discuss age, instrument, goals, location and lesson length before arranging a paid trial lesson."
+      prices: "Guide prices are GBP 24-27 for 30 minutes, GBP 36-40 for 45 minutes, and GBP 45-50 for 60 minutes depending on instrument and travel.",
+      areas: "Amanda is best placed for Stockport, Cheadle, Cheadle Hulme, Bramhall, Hazel Grove, Sale, Altrincham and selected South Manchester areas.",
+      trial: "The best next step is a short call to discuss age, instrument, goals, location and lesson length before arranging a first lesson."
     };
     if (chatAnswer) chatAnswer.textContent = answers[key] || answers.trial;
     tracking.fire("chat_quick_reply", { site: "amanda-schrem-music", topic: key });

@@ -210,13 +210,14 @@ button.btn:hover {
   width: min(1160px, calc(100% - 32px));
   margin: 0 auto;
   display: grid;
-  align-content: center;
+  align-content: start;
+  padding-top: clamp(42px, 7vh, 76px);
   max-width: 1160px;
 }
 
 .hero-copy {
-  width: min(640px, 100%);
-  padding: 48px 0 96px;
+  width: min(720px, 100%);
+  padding: 0 0 178px;
 }
 
 .eyebrow {
@@ -242,8 +243,8 @@ h2 {
 }
 
 h1 {
-  font-size: clamp(2.5rem, 7vw, 5.7rem);
-  max-width: 10ch;
+  font-size: clamp(2.35rem, 5.2vw, 4.65rem);
+  max-width: 15ch;
 }
 
 h2 {
@@ -705,7 +706,6 @@ textarea {
   }
 
   .hero-content {
-    align-content: start;
     padding-top: 34px;
   }
 
@@ -714,7 +714,7 @@ textarea {
   }
 
   h1 {
-    max-width: 11ch;
+    max-width: 13ch;
   }
 
   .trust-strip {
@@ -737,13 +737,21 @@ textarea {
   .wrap,
   .hero-content,
   .trust-strip {
-    width: min(100% - 24px, 1160px);
+    width: calc(100% - 24px);
+    max-width: 1160px;
   }
 
   .hero,
   .hero-media,
   .hero-media img {
-    min-height: 820px;
+    min-height: 920px;
+  }
+
+  .hero-copy,
+  .hero-copy .lead,
+  .hero-actions {
+    width: 100%;
+    max-width: 360px;
   }
 
   .trust-strip {
@@ -773,15 +781,45 @@ textarea {
   }
 
   .chat-widget {
-    right: 12px;
-    bottom: 76px;
+    top: 84px;
+    left: 334px;
+    right: auto;
+    bottom: auto;
   }
 
   .chat-toggle {
-    padding: 12px 14px;
+    position: relative;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    overflow: hidden;
+    color: transparent;
+  }
+
+  .chat-toggle::after {
+    content: "?";
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-size: 1rem;
+    text-indent: 0;
+  }
+
+  .chat-panel {
+    top: 48px;
+    bottom: auto;
   }
 
   .site-footer {
     padding-bottom: 116px;
+  }
+}
+
+@media (max-width: 360px) {
+  .chat-widget {
+    left: auto;
+    right: 12px;
   }
 }
