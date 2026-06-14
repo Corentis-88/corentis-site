@@ -53,6 +53,7 @@ document.querySelectorAll("[data-chat-reply]").forEach((button) => {
   button.addEventListener("click", () => {
     const key = button.dataset.chatReply;
     const answers = {
+      qualifications: "Amanda is a qualified teacher with QTS, PGCE training through the University of Derby, 10 GCSEs at A* and classroom experience across primary, secondary, SEND and EAL support.",
       prices: "General tutoring is planned from GBP 38-45 per hour. SEND-aware one-to-one support is planned from GBP 50-60 per hour depending on need, travel and preparation.",
       areas: "Amanda is best placed for Stockport, Cheadle, Cheadle Hulme, Bramhall, Hazel Grove, Sale, Altrincham and selected South Manchester areas.",
       trial: "The best next step is a free parent fit call to discuss the learner's needs, school year, subject, confidence and location."

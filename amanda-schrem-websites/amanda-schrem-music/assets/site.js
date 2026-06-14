@@ -53,6 +53,7 @@ document.querySelectorAll("[data-chat-reply]").forEach((button) => {
   button.addEventListener("click", () => {
     const key = button.dataset.chatReply;
     const answers = {
+      qualifications: "Amanda is a Grade 8 pianist with Distinction, Grade 8 violinist with Merit, former Uppingham music scholar and qualified teacher.",
       prices: "Guide prices are GBP 24-27 for 30 minutes, GBP 36-40 for 45 minutes, and GBP 45-50 for 60 minutes depending on instrument and travel.",
       areas: "Amanda is best placed for Stockport, Cheadle, Cheadle Hulme, Bramhall, Hazel Grove, Sale, Altrincham and selected South Manchester areas.",
       trial: "The best next step is a short call to discuss age, instrument, goals, location and lesson length before arranging a first lesson."
